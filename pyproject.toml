@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proboot"
+version = "0.1.0"
+description = "A CLI tool for bootstrapping Python projects"
+authors = [{name = "PriNova", email = "info@prinova.de"}]
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.scripts]
+proboot = "proboot.main:main"
+
+[project.urls]
+Homepage = "https://github.com/PriNova/bootstrap-apps"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
