@@ -1,6 +1,10 @@
+import os
 import sys
+
 from proboot.cli.parser import create_parser
-from proboot.features.python_project.bootstrapper import bootstrap_python_project
+from proboot.features.python_project.bootstrapper import \
+    bootstrap_python_project
+
 
 def interactive_mode():
     project_name = input("Enter the project name: ").strip()
@@ -33,6 +37,6 @@ def main():
         bootstrap_python_project(project_name, init_git)
     else:
         print(f"Project type {project_type} is not supported yet.")
-
+    
 if __name__ == "__main__":
     main()

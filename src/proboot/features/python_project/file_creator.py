@@ -3,6 +3,12 @@ import sys
 import venv
 
 
+def create_project_structure(project_name):
+    os.makedirs(os.path.join(project_name, 'src', project_name, 'features'), exist_ok=True)
+    open(os.path.join(project_name, 'src', project_name, '__init__.py'), 'a').close()
+    open(os.path.join(project_name, 'src', project_name, 'features', '__init__.py'), 'a').close()
+    print(f"Created project structure for {project_name}")
+
 def create_main_py(project_name):
     main_py_content = '''
 def main():
@@ -11,7 +17,7 @@ def main():
 if __name__ == "__main__":
     main()
 '''
-    with open(os.path.join(project_name, 'main.py'), 'w') as f:
+    with open(os.path.join(project_name, 'src', project_name, 'main.py'), 'w') as f:
         f.write(main_py_content.strip())
     print("Created main.py")
 
@@ -23,11 +29,14 @@ This project was created using proboot.
 
 ## Getting Started
 
-1. Activate the virtual environment:
+1. Install the project:
+`pip install -e .`
+
+2. Activate the virtual environment:
 `source venv/bin/activate`
 
-2. Run the main script:
-`python main.py`
+3. Run the main script:
+`python -m {project_name}.main`
 
 ## License
 
@@ -52,11 +61,62 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 '''
     with open(os.path.join(project_name, '.gitignore'), 'w') as f:
         f.write(gitignore_content.strip())
     print("Created .gitignore")
 
+def create_pyproject_toml(project_name):
+    pyproject_content = f'''
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{project_name}"
+version = "0.1.0"
+description = "A project created with proboot"
+authors = [{{name = "Your Name", email = "your.email@example.com"}}]
+readme = "README.md"
+requires-python = ">=3.7"
+
+[project.scripts]
+{project_name} = "{project_name}.main:main"
+'''
+    with open(os.path.join(project_name, 'pyproject.toml'), 'w') as f:
+        f.write(pyproject_content.strip())
+    print("Created pyproject.toml")
+
+def create_setup_py(project_name):
+    setup_content = '''
+from setuptools import setup, find_packages
+
+setup(
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+)
+'''
+    with open(os.path.join(project_name, 'setup.py'), 'w') as f:
+        f.write(setup_content.strip())
+    print("Created setup.py")
 def create_venv(project_name):
     venv.create(os.path.join(project_name, 'venv'), with_pip=True)
     print("Created virtual environment")
