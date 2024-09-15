@@ -1,5 +1,7 @@
 import os
+import sys
 import venv
+
 
 def create_main_py(project_name):
     main_py_content = '''
@@ -58,3 +60,19 @@ Thumbs.db
 def create_venv(project_name):
     venv.create(os.path.join(project_name, 'venv'), with_pip=True)
     print("Created virtual environment")
+
+def activate_venv(project_name):
+    venv_path = os.path.join(project_name, 'venv')
+    if os.path.exists(venv_path):
+        if sys.platform == 'win32':
+            activate_script = os.path.join(venv_path, 'Scripts', 'activate.bat')
+        else:
+            activate_script = os.path.join(venv_path, 'bin', 'activate')
+        
+        if os.path.exists(activate_script):
+            print(f"To activate the virtual environment, run:")
+            print(f"source {activate_script}")
+        else:
+            print("Virtual environment exists but activation script not found.")
+    else:
+        print("Virtual environment not found.")
