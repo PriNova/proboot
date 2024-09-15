@@ -1,6 +1,6 @@
-# projboot
+# proboot
 
-projboot is a command-line interface (CLI) tool designed to bootstrap Python projects quickly and efficiently. It automates the process of setting up a new project structure, creating essential files, and initializing a git repository.
+proboot is a command-line interface (CLI) tool designed to bootstrap Python projects quickly and efficiently. It automates the process of setting up a new project structure, creating essential files, and initializing a git repository.
 
 ## Features
 
@@ -14,20 +14,20 @@ projboot is a command-line interface (CLI) tool designed to bootstrap Python pro
 
 ## Installation
 
-To install projboot, run the following command:
-`pip install projboot`
+To install proboot, run the following command:
+`pip install proboot`
 
 
 ## Usage
 
-You can use projboot in two ways:
+You can use proboot in two ways:
 
 1. Command-line mode:
-`projboot my_new_project --type python`
+`proboot my_new_project --type python`
 Use the `--no-git` flag if you don't want to initialize a git repository.
 
 2. Interactive mode:
-`projboot`
+`proboot`
 
 Follow the prompts to set up your project.
 
