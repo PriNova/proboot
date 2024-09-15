@@ -86,19 +86,42 @@ def bootstrap_python_project(project_name, init_git):
     if init_git:
         init_git_repo(project_name)
 
+def interactive_mode():
+    project_name = input("Enter the project name: ").strip()
+    while not project_name:
+        project_name = input("Project name cannot be empty. Please enter a valid name: ").strip()
+
+    project_type = input("Enter the project type (python) [default: python]: ").strip().lower()
+    while project_type not in ['', 'python']:
+        project_type = input("Invalid project type. Please enter 'python': ").strip().lower()
+    
+    if project_type == '' or project_type == 'python':
+        project_type = 'python'
+    
+    init_git = input("Initialize git repository? (y/n) [default: y]: ").strip().lower()
+    init_git = init_git != 'n'
+
+    return project_name, project_type, init_git
+
 def main():
-    parser = argparse.ArgumentParser(description="Bootstrap a new project")
-    parser.add_argument("project_name", help="Name of the project")
-    parser.add_argument("--type", choices=["python"], default="python", help="Type of project to create")
-    parser.add_argument("--no-git", action="store_true", help="Don't initialize a git repository")
+    if len(sys.argv) > 1:
+        parser = argparse.ArgumentParser(description="Bootstrap a new project")
+        parser.add_argument("project_name", help="Name of the project")
+        parser.add_argument("--type", choices=["python"], default="python", help="Type of project to create")
+        parser.add_argument("--no-git", action="store_true", help="Don't initialize a git repository")
 
-    args = parser.parse_args()
-
-    if args.type == "python":
-        bootstrap_python_project(args.project_name, not args.no_git)
+        args = parser.parse_args()
+        project_name = args.project_name
+        project_type = args.type
+        init_git = not args.no_git
     else:
-        print(f"Project type {args.type} is not supported yet.")
+        project_name, project_type, init_git = interactive_mode()
+
+    if project_type == "python":
+        bootstrap_python_project(project_name, init_git)
+    else:
+        print(f"Project type {project_type} is not supported yet.")
 
 if __name__ == "__main__":
- main()
+    main()
 
