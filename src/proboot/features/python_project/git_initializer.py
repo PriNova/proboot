@@ -33,4 +33,6 @@ def init_git_repo(project_name):
             None
     """
     subprocess.run(['git', 'init', '--initial-branch=main'], cwd=project_name, check=True)
+    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "commit", "-m", "Initial commit"], check=True)
     print("Initialized git repository")
