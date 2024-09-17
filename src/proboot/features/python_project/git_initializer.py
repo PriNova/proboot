@@ -11,6 +11,7 @@ Functions:
     init_git_repo(project_name): Initialize a new Git repository in the
                                  specified project directory.
 """
+import os
 import subprocess
 
 
@@ -33,6 +34,7 @@ def init_git_repo(project_name):
             None
     """
     subprocess.run(['git', 'init', '--initial-branch=main'], cwd=project_name, check=True)
+    os.chdir(project_name)
     subprocess.run(["git", "add", "."], check=True)
     subprocess.run(["git", "commit", "-m", "Initial commit"], check=True)
     print("Initialized git repository")

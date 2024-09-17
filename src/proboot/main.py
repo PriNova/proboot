@@ -26,8 +26,8 @@ def interactive_mode():
     """
     Interactively prompt the user for project details.
     
-    This function asks the user to input the project name, project type,
-    and whether to initialize a git repository.
+    This function asks the user to input the project name, select the project type
+    from a numbered list, and choose whether to initialize a git repository.
     
     Returns:
         tuple: A tuple containing:
@@ -39,18 +39,26 @@ def interactive_mode():
     while not project_name:
         project_name = input("Project name cannot be empty. Please enter a valid name: ").strip()
 
-    project_type = input("Enter the project type (python/react-typescript) [default: python]: ").strip().lower()
-    while project_type not in ['', 'python', 'react-typescript']:
-        project_type = input("Invalid project type. Please enter 'python' or 'react-typescript': ").strip().lower()
+    project_types = ["python", "react-typescript"]
+    print("Select the project type:")
+    for i, ptype in enumerate(project_types, 1):
+        print(f"{i}. {ptype}")
 
-    if project_type == '':
-        project_type = 'python'
+    while True:
+        try:
+            selection = int(input("Enter the number of your choice [default: 1]: ") or "1")
+            if 1 <= selection <= len(project_types):
+                project_type = project_types[selection - 1]
+                break
+            else:
+                print(f"Please enter a number between 1 and {len(project_types)}.")
+        except ValueError:
+            print("Please enter a valid number.")
 
     init_git = input("Initialize git repository? (y/n) [default: y]: ").strip().lower()
     init_git = init_git != 'n'
 
     return project_name, project_type, init_git
-
 def main():
     """
     Main function to handle the project bootstrapping process.

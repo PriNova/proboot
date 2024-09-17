@@ -14,8 +14,8 @@ Functions:
 - bootstrap_react_typescript_project: Main function to create a new React TypeScript project
 """
 import os
+import subprocess
 
-from proboot.features.python_project.git_initializer import init_git_repo
 from proboot.features.react_typescript_project.dependency_installer import \
     install_dependencies
 from proboot.features.react_typescript_project.project_creator import \
@@ -40,7 +40,9 @@ def bootstrap_react_typescript_project(project_name, init_git):
     create_react_typescript_project(project_name)
     install_dependencies()
     if init_git:
-        init_git_repo(project_name)
+        subprocess.run(['git', 'init', '--initial-branch=main'], check=True)
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "commit", "-m", "Initial commit"], check=True)
 
     print(f"React TypeScript project '{project_name}' has been created successfully.")
     print("To start the development server, run:")

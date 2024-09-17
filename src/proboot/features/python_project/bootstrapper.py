@@ -18,16 +18,10 @@ The main function `bootstrap_python_project` orchestrates the creation of:
 Functions:
 - bootstrap_python_project: Main function to create a new Python project
 """
+
 from proboot.features.python_project.file_creator import (
-    activate_venv,
-    create_gitignore,
-    create_main_py,
-    create_project_structure,
-    create_pyproject_toml,
-    create_readme,
-    create_setup_py,
-    create_venv,
-)
+    activate_venv, create_gitignore, create_main_py, create_project_structure,
+    create_pyproject_toml, create_readme, create_setup_py, create_venv)
 from proboot.features.python_project.git_initializer import init_git_repo
 from proboot.utils.directory_handler import create_project_directory
 
@@ -55,3 +49,6 @@ def bootstrap_python_project(project_name, init_git):
     activate_venv(project_name)
     if init_git:
         init_git_repo(project_name)
+        #os.chdir(project_name)
+        #subprocess.run(["git", "add", "."], check=True)
+        #subprocess.run(["git", "commit", "-m", "Initial commit"], check=True)
