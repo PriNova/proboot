@@ -14,6 +14,7 @@ It provides functionality to:
 These functions are used to bootstrap a new Python project with a standardized
 structure and common configuration files.
 """
+
 import os
 import sys
 import venv
@@ -29,16 +30,14 @@ def create_project_structure(project_name):
     Returns:
         None
     """
-    os.makedirs(
-        os.path.join(project_name, "src", project_name, "features"), exist_ok=True
-    )
+    os.makedirs(os.path.join(project_name, "src", "features"), exist_ok=True)
     open(
-        os.path.join(project_name, "src", project_name, "__init__.py"),
+        os.path.join(project_name, "src", "__init__.py"),
         "a",
         encoding="utf-8",
     ).close()
     open(
-        os.path.join(project_name, "src", project_name, "features", "__init__.py"),
+        os.path.join(project_name, "src", "features", "__init__.py"),
         "a",
         encoding="utf-8",
     ).close()
@@ -63,7 +62,7 @@ if __name__ == "__main__":
     main()
 """
     with open(
-        os.path.join(project_name, "src", project_name, "main.py"),
+        os.path.join(project_name, "src", "main.py"),
         "w",
         encoding="utf-8",
     ) as f:
