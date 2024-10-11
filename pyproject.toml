@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "proboot"
-version = "0.1.0"
+version = "0.1.1"
 description = "A CLI tool for bootstrapping Python projects"
 authors = [{name = "PriNova", email = "info@prinova.de"}]
 readme = "README.md"
