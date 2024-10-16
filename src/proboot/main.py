@@ -12,14 +12,14 @@ The main components of this module are:
 Supported project types:
 - Python
 - React with TypeScript
+- Standalone TypeScript
 """
 import sys
 
 from proboot.cli.parser import create_parser
-from proboot.features.python_project.bootstrapper import \
-    bootstrap_python_project
-from proboot.features.react_typescript_project.bootstrapper import \
-    bootstrap_react_typescript_project
+from proboot.features.python_project.bootstrapper import bootstrap_python_project
+from proboot.features.react_typescript_project.bootstrapper import bootstrap_react_typescript_project
+from proboot.features.typescript_project.bootstrapper import bootstrap_typescript_project
 
 
 def interactive_mode():
@@ -32,14 +32,14 @@ def interactive_mode():
     Returns:
         tuple: A tuple containing:
             - project_name (str): The name of the project.
-            - project_type (str): The type of the project (python or react-typescript).
+            - project_type (str): The type of the project (python, react-typescript, or typescript).
             - init_git (bool): Whether to initialize a git repository.
     """
     project_name = input("Enter the project name: ").strip()
     while not project_name:
         project_name = input("Project name cannot be empty. Please enter a valid name: ").strip()
 
-    project_types = ["python", "react-typescript"]
+    project_types = ["python", "react-typescript", "typescript"]
     print("Select the project type:")
     for i, ptype in enumerate(project_types, 1):
         print(f"{i}. {ptype}")
@@ -59,6 +59,7 @@ def interactive_mode():
     init_git = init_git != 'n'
 
     return project_name, project_type, init_git
+
 def main():
     """
     Main function to handle the project bootstrapping process.
@@ -87,6 +88,8 @@ def main():
         bootstrap_python_project(project_name, init_git)
     elif project_type == "react-typescript":
         bootstrap_react_typescript_project(project_name, init_git)
+    elif project_type == "typescript":
+        bootstrap_typescript_project(project_name, init_git)
     else:
         print(f"Project type {project_type} is not supported yet.")
 
